@@ -23,17 +23,13 @@
 ;; https://docs.racket-lang.org/rackunit/api.html
 
 (define-test-suite a0-test-suite
-  (test-case ""
-    (check-regexp-match
-     #rx"2\\.(13|14|15)"
-     (with-output-to-string (thunk (system "nasm --version")))))
-
-  (test-case ""
+  (test-case "`compile` finished and FACT_S works"
     (check-regexp-match
      #rx"\\.exe"
      (compile FACT_S)))
 
-  (test-equal? "" (execute FACT_S) 120))
+  (test-equal? "`execute` done and FACT_S compiles and executes correctly"
+               (execute FACT_S) 120))
 
 ;; Naturally, use the same suite name here.
 
