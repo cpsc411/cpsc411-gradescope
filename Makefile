@@ -34,7 +34,7 @@ grader-image: grade.rkt
 
 zip: milestone-$(n).zip
 
-milestone-$(n): grade.rkt
+milestone-$(n).zip: grade.rkt
 	rm -rf setup.sh
 	echo '#!/bin/bash' > setup.sh
 	echo 'cd /autograder/source' > setup.sh
