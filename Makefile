@@ -1,5 +1,5 @@
 # Run with
-#   make grade s=DIR
+#   make grade s=DIR n=MILESTONE-NUMBER
 # where DIR is the current subdirectory that holds the student's work:
 # e.g.,
 #   make grade s=sq/s1
@@ -17,20 +17,27 @@ grade:
 	docker run -ti \
 		-v `pwd`/tests/$(s):/autograder/submission \
 		-v `pwd`/autograder/results:/autograder/results \
-		shriramk/gradescope-racket /autograder/run_autograder
+		cpsc411-gradescope-m$(n) /autograder/run_autograder
 	printf "\n\n"
 	cat autograder/results/results.json
 	printf "\n\n"
 
-base-image:
-	docker build -f Dockerfile.base-image -t gradescope-racket-base .
-grader-image:
-	docker build -f Dockerfile.grader-image -t shriramk/gradescope-racket .
+grade.rkt: grade_milestone_$(n).rkt
+	cp $< $@
+	touch `ls grade_milestone_*.rkt | grep -v $<`
 
-zip:
+base-image: grade.rkt
+	docker build -f Dockerfile.base-image -t gradescope-racket-base .
+
+grader-image: grade.rkt
+	docker build -f Dockerfile.grader-image -t cpsc411-gradescope-m$(n) .
+
+zip: milestone-$(n).zip
+
+milestone-$(n): grade.rkt
 	rm -rf setup.sh
 	echo '#!/bin/bash' > setup.sh
 	echo 'cd /autograder/source' > setup.sh
 	tail -n +2 Dockerfile.base-image | sed "s/COPY/foo cp/" | cut -f 2- -d ' ' >> setup.sh
-	zip -r upload-to-gradescope.zip setup.sh ssh_config id_cpsc411-deploy-key run_autograder grade.rkt lib-grade.rkt
+	zip -r $@ setup.sh ssh_config id_cpsc411-deploy-key run_autograder grade.rkt lib-grade.rkt
 
