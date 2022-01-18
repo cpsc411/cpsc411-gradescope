@@ -4,7 +4,8 @@
 
 (require "lib-grade.rkt"
          cpsc411/compiler-lib
-         cpsc411/test-suite/public/a1
+         cpsc411/langs/v1
+         cpsc411/test-suite/public/v1
          cpsc411/test-suite/private/a1)
 
 ;; Use as many
@@ -28,14 +29,19 @@
 ;; https://docs.racket-lang.org/rackunit/api.html
 
 (generate-results
- (test-suite ""
-  (a1-public-test-suite
+ (test-suite
+  ""
+  (v1-public-test-suite
    (list
     check-paren-x64
     generate-x64
     wrap-x64-run-time
     wrap-x64-boilerplate)
-   interp-paren-x64)
+   (list
+    interp-paren-x64-v1
+    interp-paren-x64-v1
+    #f #f)
+   check-paren-x64 interp-paren-x64)
 
   (a1-private-test-suite
    (list
