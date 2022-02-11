@@ -8,7 +8,7 @@
          cpsc411/2c-run-time
          cpsc411/langs/v4
          cpsc411/test-suite/public/v4
-         #;cpsc411/test-suite/private/v4)
+         cpsc411/test-suite/private/v4)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -76,6 +76,15 @@
  (test-suite
   ""
   (v4-public-test-suite
+   (current-pass-list)
+   (map cdr pass-map)
+
+   link-paren-x64
+   interp-paren-x64
+   interp-values-lang
+   check-values-lang)
+
+  (v4-private-test-suite
    (current-pass-list)
    (map cdr pass-map)
 
