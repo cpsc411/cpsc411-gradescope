@@ -26,7 +26,7 @@ grade.rkt: grade_milestone_$(n).rkt
 	cp $< $@
 	touch `ls grade_milestone_*.rkt | grep -v $<`
 
-base-image: grade.rkt
+base-image:
 	docker build -f Dockerfile.base-image -t gradescope-racket-base .
 
 grader-image: grade.rkt
