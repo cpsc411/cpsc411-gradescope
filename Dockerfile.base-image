@@ -15,5 +15,5 @@ RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 ADD "https://api.github.com/repos/cpsc411/cpsc411-pub/commits/2021w2?per_page=1" latest_commit
 RUN raco pkg install --auto https://github.com/cpsc411/cpsc411-pub.git?path=cpsc411-lib#2021w2
 
-RUN git clone --depth 1 --single-branch git@github.com:cpsc411/cpsc411-priv
+RUN git clone --depth 1 --single-branch -b 2021w2 git@github.com:cpsc411/cpsc411-priv
 RUN raco pkg install --batch --auto ./cpsc411-priv/cpsc411-reference-tests ./cpsc411-priv/cpsc411-reference-lib
