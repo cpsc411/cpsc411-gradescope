@@ -1,1 +1,4 @@
 grade.rkt
+setup.sh
+id_cpsc411-deploy-key
+id_cpsc411-deploy-key.pub
