@@ -38,6 +38,6 @@ milestone-$(n).zip: grade.rkt
 	rm -rf setup.sh
 	echo '#!/bin/bash' > setup.sh
 	echo 'cd /autograder/source' > setup.sh
-	tail -n +2 Dockerfile.base-image | sed "s/COPY/foo cp/" | cut -f 2- -d ' ' >> setup.sh
+	tail -n +2 Dockerfile.base-image | sed "s/COPY/foo cp/" | grep -v "ADD" | cut -f 2- -d ' ' >> setup.sh
 	zip -r $@ setup.sh ssh_config id_cpsc411-deploy-key run_autograder grade.rkt lib-grade.rkt
 
