@@ -7,6 +7,9 @@
 #   make s=sq/s1
 # suffices
 
+.priv-hash:
+	git ls-remote git@github.com:cpsc411/cpsc411-priv | grep 2021w2 | cut -f 1 > .priv-hash
+
 # Grade with reasonable simulation of Gradescope's script setup
 grade:
 	rm -rf autograder
@@ -26,7 +29,7 @@ grade.rkt: grade_milestone_$(n).rkt
 	cp $< $@
 	touch `ls grade_milestone_*.rkt | grep -v $<`
 
-base-image:
+base-image: .priv-hash
 	docker build -f Dockerfile.base-image -t gradescope-racket-base .
 
 grader-image: grade.rkt
