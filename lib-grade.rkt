@@ -87,9 +87,8 @@
   (define (make-name state result)
     (define new-name
       (string-join
-       (reverse
-        (filter (lambda (s) (and s (not (equal? s ""))))
-                (append (fold-state-names state) (list (test-result-test-case-name result)))))
+       (filter (lambda (s) (and s (not (equal? s ""))))
+               (append (reverse (fold-state-names state)) (list (test-result-test-case-name result))))
        ":"))
     (if (equal? new-name "")
         #f
