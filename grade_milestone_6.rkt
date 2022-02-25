@@ -8,7 +8,7 @@
          cpsc411/2c-run-time
          cpsc411/langs/v6
          cpsc411/test-suite/public/v6
-         #;cpsc411/test-suite/private/v5)
+         cpsc411/test-suite/private/v6)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
