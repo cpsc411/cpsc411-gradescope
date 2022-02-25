@@ -7,6 +7,8 @@
 #   make s=sq/s1
 # suffices
 
+.PHONY: .priv-hash
+
 .priv-hash:
 	git ls-remote git@github.com:cpsc411/cpsc411-priv | grep 2021w2 | cut -f 1 > .priv-hash
 
