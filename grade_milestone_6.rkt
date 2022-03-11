@@ -79,6 +79,8 @@
    (map car pass-map)
    (map cdr pass-map))
 
-  #;(v6-private-test-suite
-     (current-pass-list)
-     (map cdr pass-map))))
+  (v6-private-test-suite
+   (current-pass-list)
+   (map cdr pass-map)
+
+   impose-calling-conventions)))
