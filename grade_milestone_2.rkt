@@ -9,7 +9,7 @@
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
          cpsc411/test-suite/public/v3
-         cpsc411/test-suite/private/a2)
+         #;cpsc411/test-suite/private/a2)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -72,7 +72,7 @@
     interp-paren-x64-v2
     #f #f))
 
-  (a2-private-test-suite (list
+  #;(a2-private-test-suite (list
                           check-values-lang
                           uniquify
                           sequentialize-let
