@@ -79,13 +79,19 @@
 (current-pass-list
  (map car pass-map))
 
-(generate-results
- (test-suite
-  ""
-  (v7-public-test-suite
-   (map car pass-map)
-   (map cdr pass-map))
+(provide test-suite-hash)
+(define test-suite-hash
+  (generate-results/hash
+   (test-suite
+    ""
+    (v7-public-test-suite
+     (map car pass-map)
+     (map cdr pass-map))
 
-  (v7-private-test-suite
-   (current-pass-list)
-   (map cdr pass-map))))
+    (v7-private-test-suite
+     (current-pass-list)
+     (map cdr pass-map)))))
+
+(module+ main
+  (produce-report/exit
+   test-suite-hash))
