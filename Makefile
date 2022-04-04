@@ -37,6 +37,9 @@ base-image: .priv-hash
 grader-image: grade.rkt
 	docker build -f Dockerfile.grader-image -t cpsc411-gradescope-m$(n) .
 
+final-image: grade.rkt
+	docker build -f Dockerfile.final-image -t cpsc411-gradescope-mfinal .
+
 zip: milestone-$(n).zip
 
 milestone-$(n).zip: grade.rkt
@@ -46,3 +49,10 @@ milestone-$(n).zip: grade.rkt
 	tail -n +2 Dockerfile.base-image | sed "s/COPY/foo cp/" | grep -v "ADD" | cut -f 2- -d ' ' >> setup.sh
 	zip -r $@ setup.sh ssh_config id_cpsc411-deploy-key run_autograder grade.rkt lib-grade.rkt
 
+milestone-final.zip: grade.rkt
+	rm -rf setup.sh
+	echo '#!/bin/bash' > setup.sh
+	echo 'cd /autograder/source' > setup.sh
+	tail -n +2 Dockerfile.base-image | sed "s/COPY/foo cp/" | grep -v "ADD" | cut -f 2- -d ' ' >> setup.sh
+	#zip -r $@ setup.sh ssh_config id_cpsc411-deploy-key run_autograder grade.rkt grade_milestone_{7,8,9,10} lib-grade.rkt
+	zip -r $@ setup.sh ssh_config id_cpsc411-deploy-key run_autograder grade.rkt grade_milestone_{7,8}.rkt lib-grade.rkt
