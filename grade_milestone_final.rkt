@@ -31,7 +31,7 @@
        ;; TODO
        (dynamic-require `(file ,(format "/autograder/source/grade_milestone_~a.rkt" m))
                         'test-suite-hash)
-       `#hasheq((score . 0)
+       `#hasheq((score . "0")
                 (output .
                         ,(format "I see that you're submitting milestone ~a; if this is not correct, please contact the instructor.\n"
                                  m)))
