@@ -41,8 +41,7 @@
                           (max (string->number a) (string->number b))]
                          [(eq? k 'output)
                           (string-append a b)])))))]
-  #;[else
+  [else
    (produce-report/exit
-    `#hasheq((score . 0)
-             (output . ,(string-append "Run failed with error\n"
-                                       (exn-message e)))))])
+    `#hasheq((score . "0")
+             (output . "You have not submitted at least milestone 7.")))])
