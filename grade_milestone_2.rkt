@@ -20,7 +20,7 @@
 
 ;; Yes, from is a keyword, it should be there, literally.
 
-(define-var check-values-lang   from "compiler.rkt")
+#;(define-var check-values-lang   from "compiler.rkt")
 (define-var uniquify            from "compiler.rkt")
 (define-var sequentialize-let   from "compiler.rkt")
 (define-var normalize-bind      from "compiler.rkt")
@@ -32,10 +32,10 @@
 (define-var flatten-begins      from "compiler.rkt")
 (define-var patch-instructions  from "compiler.rkt")
 (define-var implement-fvars     from "compiler.rkt")
-(define-var check-paren-x64     from "compiler.rkt")
+#;(define-var check-paren-x64     from "compiler.rkt")
 (define-var generate-x64        from "compiler.rkt")
-(define-var interp-values-lang  from "compiler.rkt")
-(define-var interp-paren-x64    from "compiler.rkt")
+#;(define-var interp-values-lang  from "compiler.rkt")
+#;(define-var interp-paren-x64    from "compiler.rkt")
 
 ;; Now define your tests.
 ;; The suite name can be anything you want.
@@ -47,7 +47,7 @@
   ""
   (v3-public-test-sutie
    (list
-    check-values-lang
+    #;check-values-lang
     uniquify
     sequentialize-let
     normalize-bind
@@ -60,7 +60,7 @@
     wrap-x64-run-time
     wrap-x64-boilerplate)
    (list
-    interp-values-lang-v3
+    #;interp-values-lang-v3
     interp-values-lang-v3
     interp-values-unique-lang-v3
     interp-imp-mf-lang-v3
