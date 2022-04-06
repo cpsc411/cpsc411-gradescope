@@ -2,9 +2,11 @@ FROM gradescope/auto-builds:ubuntu-18.04
 
 RUN apt-get update -y
 RUN apt-get install git nasm software-properties-common -y
-RUN add-apt-repository ppa:plt/racket -y
-RUN apt-get install -y racket
-RUN apt-get clean
+#RUN add-apt-repository "deb https://launchpad.net/~plt/+archive/ubuntu/racket 8.3+ppa1-1~hirsute1 main" -y
+#RUN apt-get install -y racket
+RUN wget https://download.racket-lang.org/releases/8.3/installers/racket-8.3-x86_64-linux-cs.sh
+RUN echo yes | sh racket-8.3-x86_64-linux-cs.sh
+#RUN apt-get clean
 RUN raco setup --doc-index --force-user-docs
 
 ADD "https://api.github.com/repos/cpsc411/cpsc411-pub/commits/2021w2?per_page=1" latest_commit
