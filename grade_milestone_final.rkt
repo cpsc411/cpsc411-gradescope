@@ -29,8 +29,7 @@
      (produce-report/exit
       (hash-union
        ;; TODO
-       `#hasheq()
-       #;(dynamic-require `(file ,(format "/autograder/source/grade_milestone_~a.rkt" 7))
+       (dynamic-require `(file ,(format "/autograder/source/grade_milestone_~a.rkt" m))
                         'test-suite-hash)
        `#hasheq((score . 0)
                 (output .
