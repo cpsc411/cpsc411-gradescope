@@ -140,7 +140,7 @@
                           (fold-state-total-results test-results)))]
          [score-str (number->string (exact->inexact raw-score))])
     (if (= raw-score 100)
-        `#hasheq((score . 100)
+        `#hasheq((score . "100")
                  (output . "Looks shipshape, all tests passed, mate!"))
         `#hasheq((score . ,score-str)
                  (tests . ,(append
