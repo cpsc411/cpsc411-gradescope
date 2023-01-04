@@ -135,9 +135,15 @@
      (length (fold-state-errors state))
      (length (fold-state-failures state))))
 
-  (let* ([test-results (fold-test-results add-result init-state test-suite
+  (let* ([start-memory (current-memory-use 'cumulative)]
+         [start-time (current-milliseconds)]
+         [test-results (fold-test-results add-result init-state test-suite
                                           #:fdown push-suite-name
                                           #:fup pop-suite-name)]
+         [end-time (current-milliseconds)]
+         [real-time (- end-time start-time)]
+         [end-memory (current-memory-use 'cumulative)]
+         [memory-usage (exact->inexact (/ (- end-memory start-memory) (* 1024 1024)))]
          [total-tests-run (fold-state-total-results test-results)]
          [total-tests-possible (score-out-of-f total-tests-run)]
          [raw-score (* 100
@@ -148,13 +154,25 @@
         `#hasheq((score . "100")
                  (total-tests-possible . ,total-tests-possible)
                  (total-tests-run . ,total-tests-run)
-                 (output . "Looks shipshape, all tests passed, mate!"))
+                 (output . "Looks shipshape, all tests passed, mate!")
+                 #;(leaderboard . (#hasheq((name . "Real time (ms)")
+                                         (value . ,real-time))
+                                 #hasheq((name . "Memory usage (MB)")
+                                         (value . ,memory-usage))
+                                 #hasheq((name . "Correctness")
+                                         (value . ,raw-score)))))
         `#hasheq((score . ,score-str)
                  (total-tests-possible . ,total-tests-possible)
                  (total-tests-run . ,total-tests-run)
                  (output . ,(if (eq? 0 (length (fold-state-failures test-results)))
                                 "Something has gone wrong and your score is likely to be inaccurate; contact an instructor."
                                 ""))
+                 #;(leaderboard . (#hasheq((name . "Real time (ms)")
+                                         (value . ,real-time))
+                                 #hasheq((name . "Memory usage (MB)")
+                                         (value . ,memory-usage))
+                                 #hasheq((name . "Correctness")
+                                         (value . ,raw-score))))
                  (tests . ,(append
                             (map (λ (name)
                                    `#hasheq((output
