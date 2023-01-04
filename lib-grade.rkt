@@ -3,6 +3,8 @@
 (require lang/prim)
 (require rackunit)
 (require json)
+(require racket/hash)
+(require racket/exn)
 
 (provide produce-report/exit define-var generate-results generate-results/hash)
 
@@ -82,9 +84,14 @@
 
 (define (generate-results/hash test-suite [score-out-of-f
                                            (lambda (total-tests) total-tests)])
-  (struct fold-state (successes errors failures names) #:transparent)
+  (struct fold-state (success-names
+                      ; (Listof test-result?) x (Listof String)
+                      error-results error-names
+                      ; (Listof test-result?) x (Listof String)
+                      failure-results failure-names
+                      names) #:transparent)
 
-  (define init-state (fold-state (list) (list) (list) (list)))
+  (define init-state (fold-state (list) (list) (list) (list) (list) (list)))
 
   (define (push-suite-name name state)
     (struct-copy fold-state state [names (cons name (fold-state-names state))]))
@@ -105,20 +112,22 @@
   (define (add-error state result)
     (struct-copy fold-state
                  state
-                 [errors (cons (make-name state result)
-                               (fold-state-errors state))]))
+                 [error-names (cons (make-name state result)
+                                    (fold-state-error-names state))]
+                 [error-results (cons result (fold-state-error-names state))]))
 
   (define (add-failure state result)
     (struct-copy fold-state
                  state
-                 [failures (cons (make-name state result)
-                                 (fold-state-failures state))]))
+                 [failure-names (cons (make-name state result)
+                                      (fold-state-failure-names state))]
+                 [failure-results (cons result (fold-state-failure-results state))]))
 
   (define (add-success state result)
     (struct-copy fold-state
                  state
-                 [successes (cons (make-name state result)
-                                  (fold-state-successes state))]))
+                 [success-names (cons (make-name state result)
+                                  (fold-state-success-names state))]))
 
   (define (add-result result state)
     (cond
@@ -131,9 +140,30 @@
 
   (define (fold-state-total-results state)
     (+
-     (length (fold-state-successes state))
-     (length (fold-state-errors state))
-     (length (fold-state-failures state))))
+     (length (fold-state-success-names state))
+     (length (fold-state-error-names state))
+     (length (fold-state-failure-names state))))
+
+  (define ((make-failure-hash type) name the-exn)
+    (define short-name
+      (if name
+          name
+          "Unnamed test"))
+    (define rendered-output
+      (if name
+          (format "~a test named «~a»" type name)
+          (format "~a unnamed test" type)))
+    (list
+     `#hasheq((name . ,short-name)
+              (status . "failed")
+              (output . ,rendered-output))
+     `#hasheq((name . ,(format "Debug for ~a" short-name))
+              (visibility . "hidden")
+              (output . ,(let ([p (open-output-string)])
+                           (parameterize ([current-error-port p]
+                                          [current-output-port p])
+                             ((current-check-handler) the-exn))
+                           (get-output-string p))))))
 
   (let* ([start-memory (current-memory-use 'cumulative)]
          [start-time (current-milliseconds)]
@@ -147,50 +177,30 @@
          [total-tests-run (fold-state-total-results test-results)]
          [total-tests-possible (score-out-of-f total-tests-run)]
          [raw-score (* 100
-                       (/ (length (fold-state-successes test-results))
+                       (/ (length (fold-state-success-names test-results))
                           total-tests-possible))]
          [score-str (number->string (exact->inexact raw-score))])
-    (if (= raw-score 100)
-        `#hasheq((score . "100")
-                 (total-tests-possible . ,total-tests-possible)
-                 (total-tests-run . ,total-tests-run)
-                 (output . "Looks shipshape, all tests passed, mate!")
-                 #;(leaderboard . (#hasheq((name . "Real time (ms)")
-                                         (value . ,real-time))
-                                 #hasheq((name . "Memory usage (MB)")
-                                         (value . ,memory-usage))
-                                 #hasheq((name . "Correctness")
-                                         (value . ,raw-score)))))
-        `#hasheq((score . ,score-str)
-                 (total-tests-possible . ,total-tests-possible)
-                 (total-tests-run . ,total-tests-run)
-                 (output . ,(if (eq? 0 (length (fold-state-failures test-results)))
-                                "Something has gone wrong and your score is likely to be inaccurate; contact an instructor."
-                                ""))
-                 #;(leaderboard . (#hasheq((name . "Real time (ms)")
-                                         (value . ,real-time))
-                                 #hasheq((name . "Memory usage (MB)")
-                                         (value . ,memory-usage))
-                                 #hasheq((name . "Correctness")
-                                         (value . ,raw-score))))
-                 (tests . ,(append
-                            (map (λ (name)
-                                   `#hasheq((output
-                                             . ,(cond
-                                                  [name =>
-                                                        (lambda (test-case-name)
-                                                          (string-append "Execution error in test named «"
-                                                                         test-case-name
-                                                                         "»"))]
-                                                  [else "Execution error in unnamed test"]))))
-                                 (fold-state-errors test-results))
-                            (map (λ (name)
-                                   `#hasheq((output
-                                             . ,(cond
-                                                  [name =>
-                                                        (lambda (test-case-name)
-                                                          (string-append "Incorrect answer from test named «"
-                                                                         test-case-name
-                                                                         "»"))]
-                                                  [else "Incorrect answer from unnamed test"]))))
-                                 (fold-state-failures test-results))))))))
+    (hash-union
+     `#hasheq((total-tests-possible . ,total-tests-possible)
+              (total-tests-run . ,total-tests-run)
+              #;(leaderboard . (#hasheq((name . "Compile Time (real time ms)")
+                                        (value . ,real-time))
+                                #hasheq((name . "Compile-time Memory Usage (MB)")
+                                        (value . ,memory-usage)))))
+
+     (if (= raw-score 100)
+         `#hasheq((score . "100")
+                  (output . "Looks shipshape, all tests passed, mate!"))
+         (hash-union
+          (if (eq? 0 (+ (length (fold-state-failure-names test-results))
+                        (length (fold-state-error-names test-results))))
+              `#hasheq((output . "Something has gone wrong and your score is likely to be inaccurate; contact an instructor."))
+              `#hasheq())
+          `#hasheq((score . ,score-str)
+                   (tests . ,(append
+                              (append-map (make-failure-hash "Execution error in")
+                                          (fold-state-error-names test-results)
+                                          (map test-error-result (fold-state-error-results test-results)))
+                              (append-map (make-failure-hash "Incorrect answer from")
+                                          (fold-state-failure-names test-results)
+                                          (map test-failure-result (fold-state-failure-results test-results)))))))))))
