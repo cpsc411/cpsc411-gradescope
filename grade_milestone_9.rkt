@@ -102,7 +102,9 @@
 (current-pass-list
  (map car pass-map))
 
-(provide test-suite-hash)
+(provide test-suite-hash TOTAL_TESTS)
+(define TOTAL_TESTS 3846)
+
 (define test-suite-hash
   (generate-results/hash
    (test-suite
@@ -113,7 +115,8 @@
 
     (v9-private-test-suite
      (current-pass-list)
-     (map cdr pass-map)))))
+     (map cdr pass-map)))
+   (lambda (_) TOTAL_TESTS)))
 
 (module+ main
   (produce-report/exit

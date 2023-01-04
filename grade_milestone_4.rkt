@@ -72,6 +72,8 @@
   (current-pass-list
    (map car pass-map))
 
+(define TOTAL_TESTS 2077)
+
 (generate-results
  (test-suite
   ""
@@ -91,4 +93,5 @@
    link-paren-x64
    interp-paren-x64
    interp-values-lang
-   check-values-lang)))
+   check-values-lang))
+ (lambda (_) TOTAL_TESTS))

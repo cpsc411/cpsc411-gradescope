@@ -28,6 +28,10 @@
 ;; For the individual tests, use the test-* forms in
 ;; https://docs.racket-lang.org/rackunit/api.html
 
+;; NOTE: Because some tests are dynamically generated, we need to provide the
+;; true number of tests.
+(define TOTAL_TESTS 55)
+
 (generate-results
  (test-suite
   ""
@@ -49,4 +53,5 @@
     generate-x64
     wrap-x64-run-time
     wrap-x64-boilerplate)
-   interp-paren-x64)))
+   interp-paren-x64))
+ (lambda (_) TOTAL_TESTS))

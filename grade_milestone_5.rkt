@@ -70,6 +70,8 @@
   (current-pass-list
    (map car pass-map))
 
+(define TOTAL_TESTS 4421)
+
 (generate-results
  (test-suite
   ""
@@ -87,4 +89,5 @@
    uncover-locals
    undead-analysis
    impose-calling-conventions
-   check-values-lang)))
+   check-values-lang))
+ (lambda (_) TOTAL_TESTS))

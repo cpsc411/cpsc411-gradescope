@@ -73,12 +73,15 @@
                  `#hasheq((score . 0)
                           (output . ,(string-append "File " bfn " not found: please check your submission"))))))]))]))
 
-(define (generate-results test-suite)
+(define (generate-results test-suite [score-out-of-f
+                                      (lambda (total-tests) total-tests)])
   (produce-report/exit
    (generate-results/hash
-    test-suite)))
+    test-suite
+    score-out-of-f)))
 
-(define (generate-results/hash test-suite)
+(define (generate-results/hash test-suite [score-out-of-f
+                                           (lambda (total-tests) total-tests)])
   (struct fold-state (successes errors failures names) #:transparent)
 
   (define init-state (fold-state (list) (list) (list) (list)))
@@ -135,14 +138,23 @@
   (let* ([test-results (fold-test-results add-result init-state test-suite
                                           #:fdown push-suite-name
                                           #:fup pop-suite-name)]
+         [total-tests-run (fold-state-total-results test-results)]
+         [total-tests-possible (score-out-of-f total-tests-run)]
          [raw-score (* 100
                        (/ (length (fold-state-successes test-results))
-                          (fold-state-total-results test-results)))]
+                          total-tests-possible))]
          [score-str (number->string (exact->inexact raw-score))])
     (if (= raw-score 100)
         `#hasheq((score . "100")
+                 (total-tests-possible . ,total-tests-possible)
+                 (total-tests-run . ,total-tests-run)
                  (output . "Looks shipshape, all tests passed, mate!"))
         `#hasheq((score . ,score-str)
+                 (total-tests-possible . ,total-tests-possible)
+                 (total-tests-run . ,total-tests-run)
+                 (output . ,(if (eq? 0 (length (fold-state-failures test-results)))
+                                "Something has gone wrong and your score is likely to be inaccurate; contact an instructor."
+                                ""))
                  (tests . ,(append
                             (map (λ (name)
                                    `#hasheq((output
