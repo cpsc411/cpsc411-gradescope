@@ -18,5 +18,5 @@ COPY id_cpsc411-deploy-key /root/.ssh/deploy_key
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 
 COPY .priv-hash /root/.priv-hash
-RUN git clone --depth 1 --single-branch -b 2021w2 git@github.com:cpsc411/cpsc411-priv
-RUN raco pkg install --batch --auto ./cpsc411-priv/cpsc411-reference-tests
+RUN git clone --depth 1 --single-branch -b 2022w2 git@github.com:cpsc411/cpsc411-priv
+RUN raco pkg install --batch --auto ./cpsc411-priv/cpsc411-reference-tests ./cpsc411-priv/cpsc411-reference-lib
