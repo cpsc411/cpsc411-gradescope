@@ -114,7 +114,7 @@
                  state
                  [error-names (cons (make-name state result)
                                     (fold-state-error-names state))]
-                 [error-results (cons result (fold-state-error-names state))]))
+                 [error-results (cons result (fold-state-error-results state))]))
 
   (define (add-failure state result)
     (struct-copy fold-state
