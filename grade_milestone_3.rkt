@@ -1,4 +1,3 @@
-
 #lang racket
 
 (require rackunit) ;; WARNING: Use the test- forms, NOT the check- forms!
@@ -73,7 +72,7 @@
    interp-paren-x64-v2
    #f #f))
 
-(define TOTAL_TESTS 897)
+(define AT_LEAST_TOTAL_TESTS 897)
 
 (generate-results
  (test-suite
@@ -81,4 +80,4 @@
   (v2-reg-alloc-public-test-suite undead-analysis conflict-analysis assign-registers)
   (v3-public-test-sutie pass-ls interp-ls)
   (v3-private-test-suite pass-ls interp-ls))
- (lambda (_) TOTAL_TESTS))
+ (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
