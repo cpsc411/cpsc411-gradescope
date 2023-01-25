@@ -44,7 +44,10 @@
 
 ;; NOTE: Because some tests are dynamically generated, we need to provide the
 ;; true number of tests.
-(define TOTAL_TESTS 316)
+;; However, this number can depend a little bit on the syntax of IR programs.
+;; If a compiler generates lots of normal forms, the number will be lower, but
+;; could be higher.
+(define AT_LEAST_TOTAL_TESTS 316)
 
 (generate-results
  (test-suite
@@ -95,4 +98,4 @@
                          check-paren-x64
                          interp-values-lang
                          interp-paren-x64))
- (lambda (_) TOTAL_TESTS))
+ (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
