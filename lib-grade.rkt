@@ -192,8 +192,11 @@
          `#hasheq((score . "100")
                   (output . "Looks shipshape, all tests passed, mate!"))
          (hash-union
-          (if (eq? 0 (+ (length (fold-state-failure-names test-results))
-                        (length (fold-state-error-names test-results))))
+          (if (or
+               (> raw-score 100)
+               (> total-tests-run total-tests-possible)
+               (eq? 0 (+ (length (fold-state-failure-names test-results))
+                         (length (fold-state-error-names test-results)))))
               `#hasheq((output . "Something has gone wrong and your score is likely to be inaccurate; contact an instructor."))
               `#hasheq())
           `#hasheq((score . ,score-str)
