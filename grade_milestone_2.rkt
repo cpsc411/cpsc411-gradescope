@@ -50,7 +50,7 @@
 ;; could be higher.
 ;;
 ;; This is the lowest apparently correct number observed so far.
-(define AT_LEAST_TOTAL_TESTS 314)
+(define AT_LEAST_TOTAL_TESTS 312)
 
 (generate-results
  (test-suite
