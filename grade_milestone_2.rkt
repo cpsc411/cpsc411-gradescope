@@ -44,10 +44,13 @@
 
 ;; NOTE: Because some tests are dynamically generated, we need to provide the
 ;; true number of tests.
+;;
 ;; However, this number can depend a little bit on the syntax of IR programs.
 ;; If a compiler generates lots of normal forms, the number will be lower, but
 ;; could be higher.
-(define AT_LEAST_TOTAL_TESTS 316)
+;;
+;; This is the lowest apparently correct number observed so far.
+(define AT_LEAST_TOTAL_TESTS 314)
 
 (generate-results
  (test-suite
