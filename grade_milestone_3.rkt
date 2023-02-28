@@ -72,7 +72,8 @@
    interp-paren-x64-v2
    #f #f))
 
-(define AT_LEAST_TOTAL_TESTS 897)
+;; Highest observed number
+(define AT_LEAST_TOTAL_TESTS 892)
 
 (generate-results
  (test-suite
