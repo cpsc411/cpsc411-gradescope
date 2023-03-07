@@ -71,7 +71,7 @@
   (current-pass-list
    (map car pass-map))
 
-(define TOTAL_TESTS 2077)
+(define AT_LEAST_TOTAL_TESTS 1586)
 
 (generate-results
  (test-suite
@@ -93,4 +93,4 @@
    interp-paren-x64
    interp-values-lang
    check-values-lang))
- (lambda (_) TOTAL_TESTS))
+ (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
