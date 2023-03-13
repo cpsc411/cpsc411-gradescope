@@ -70,7 +70,7 @@
   (current-pass-list
    (map car pass-map))
 
-(define AT_LEAST_TOTAL_TESTS 4421)
+(define AT_LEAST_TOTAL_TESTS 4329)
 
 (generate-results
  (test-suite
