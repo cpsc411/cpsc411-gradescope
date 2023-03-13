@@ -70,7 +70,7 @@
   (current-pass-list
    (map car pass-map))
 
-(define TOTAL_TESTS 4421)
+(define AT_LEAST_TOTAL_TESTS 4421)
 
 (generate-results
  (test-suite
@@ -90,4 +90,4 @@
    undead-analysis
    impose-calling-conventions
    check-values-lang))
- (lambda (_) TOTAL_TESTS))
+ (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
