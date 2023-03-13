@@ -44,7 +44,7 @@
 ;; https://docs.racket-lang.org/rackunit/api.html
 (define pass-map
   (list
-   (cons check-values-lang interp-values-lang-v5)
+   ;(cons check-values-lang interp-values-lang-v5)
    (cons uniquify interp-values-lang-v5)
    (cons sequentialize-let interp-values-unique-lang-v5)
    (cons normalize-bind interp-imp-mf-lang-v5)

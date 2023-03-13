@@ -9,13 +9,13 @@ RUN raco setup --doc-index --force-user-docs
 
 RUN raco pkg install --auto https://github.com/cpsc411/cpsc411-pub.git?path=cpsc411-lib#2022w2
 
-ADD "https://api.github.com/repos/cpsc411/cpsc411-pub/commits/2022w2?per_page=1" latest_commit
-RUN raco pkg update --auto cpsc411-lib
-
 RUN mkdir -p /root/.ssh
 COPY ssh_config /root/.ssh/config
 COPY id_cpsc411-deploy-key /root/.ssh/deploy_key
 RUN ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+ADD "https://api.github.com/repos/cpsc411/cpsc411-pub/commits/2022w2?per_page=1" latest_commit
+RUN raco pkg update --no-trash --auto cpsc411-lib
 
 COPY .priv-hash /root/.priv-hash
 RUN git clone --depth 1 --single-branch -b 2022w2 git@github.com:cpsc411/cpsc411-priv
