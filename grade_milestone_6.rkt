@@ -72,7 +72,7 @@
 (current-pass-list
  (map car pass-map))
 
-(define TOTAL_TESTS 4474)
+(define AT_LEAST_TOTAL_TESTS 4474)
 
 (generate-results
  (test-suite
@@ -86,4 +86,4 @@
    (map cdr pass-map)
 
    impose-calling-conventions))
- (lambda (_) TOTAL_TESTS))
+ (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
