@@ -83,8 +83,8 @@
 (current-pass-list
  (map car pass-map))
 
-(provide test-suite-hash TOTAL_TESTS)
-(define TOTAL_TESTS 1545)
+(provide test-suite-hash AT_LEAST_TOTAL_TESTS)
+(define AT_LEAST_TOTAL_TESTS 1545)
 (define test-suite-hash
   (generate-results/hash
    (test-suite
@@ -96,7 +96,7 @@
     #;(v8-private-test-suite
        (current-pass-list)
        (map cdr pass-map)))
-   (lambda (_) TOTAL_TESTS)))
+   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
 
 (module+ main
   (produce-report/exit
