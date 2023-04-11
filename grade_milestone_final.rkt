@@ -20,6 +20,8 @@
      '8]
     [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'specify-representation (thunk #f))
      '7]
+    [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'assign-frames (thunk #f))
+     '6]
     [else #f]))
 
 (cond
@@ -49,4 +51,4 @@
   [else
    (produce-report/exit
     `#hasheq((score . "0")
-             (output . "You have not submitted at least milestone 7.")))])
+             (output . "You have not submitted at least milestone 6.")))])
