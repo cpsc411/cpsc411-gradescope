@@ -12,7 +12,7 @@
 
 (define (detect-final-milestone)
   (cond
-    [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'expand-macros (thunk #f))
+    #;[(dynamic-require '(file "/autograder/submission/compiler.rkt") 'expand-macros (thunk #f))
      '10]
     [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'convert-closures (thunk #f))
      '9]
@@ -29,25 +29,25 @@
    =>
    (lambda (m)
      (produce-report/exit
-      (hash-union
-       ;; TODO
-       (dynamic-require `(file ,(format "/autograder/source/grade_milestone_~a.rkt" m))
-                        'test-suite-hash)
-       `#hasheq((score . "0")
-                (output .
-                        ,(format "I see that you're submitting milestone ~a; if this is not correct, please contact the instructor.\n"
-                                 m)))
-       #:combine/key (lambda (k a b)
-                       (cond
-                         [(eq? k 'score)
-                          ;; Final implementation score is 60/60
-                          (number->string
-                           (exact->inexact
-                            (* 60
-                               (/ (max (string->number a) (string->number b))
-                                  100))))]
-                         [(eq? k 'output)
-                          (string-append a b)])))))]
+      (let* ([h1 (dynamic-require `(file ,(format "/autograder/source/grade_milestone_~a.rkt" m))
+                                  'test-suite-hash)]
+             [grade (number->string
+                      (exact->inexact
+                       ;; Final implementation score is 60/60
+                       (* 60
+                          (/ (string->number (hash-ref h1 'score))
+                             100))))])
+        (hash-set
+         h1
+         'score grade
+         'output (string-join
+                  (hash-ref h1 'output)
+                  (format
+                   "I see that you're submitting milestone ~a; if this is not correct, please contact the instructor.\n"
+                   m)
+                  (format
+                   "Your current implementation grade is: ~a out of 60\n" grade)
+                  "\n")))))]
   [else
    (produce-report/exit
     `#hasheq((score . "0")
