@@ -76,16 +76,22 @@
 
 (define AT_LEAST_TOTAL_TESTS 4474)
 
-(generate-results
- (test-suite
-  ""
-  (v6-public-test-suite
-   (map car pass-map)
-   (map cdr pass-map))
+(provide test-suite-hash AT_LEAST_TOTAL_TESTS)
+(define test-suite-hash
+  (generate-results/hash
+   (test-suite
+    ""
+    (v6-public-test-suite
+     (map car pass-map)
+     (map cdr pass-map))
 
-  (v6-private-test-suite
-   (current-pass-list)
-   (map cdr pass-map)
+    (v6-private-test-suite
+     (current-pass-list)
+     (map cdr pass-map)
 
-   impose-calling-conventions))
- (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
+     impose-calling-conventions))
+   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
+
+(module+ main
+  (produce-report/exit
+   test-suite-hash))
