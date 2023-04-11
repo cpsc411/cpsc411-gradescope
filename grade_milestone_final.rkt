@@ -41,12 +41,13 @@
          h1
          'score grade
          'output (string-join
-                  (hash-ref h1 'output "")
-                  (format
-                   "I see that you're submitting milestone ~a; if this is not correct, please contact the instructor.\n"
-                   m)
-                  (format
-                   "Your current implementation grade is: ~a out of 60\n" grade)
+                  (list
+                   (hash-ref h1 'output "")
+                   (format
+                    "I see that you're submitting milestone ~a; if this is not correct, please contact the instructor.\n"
+                    m)
+                   (format
+                    "Your current implementation grade is: ~a out of 60\n" grade))
                   "\n")))))]
   [else
    (produce-report/exit
