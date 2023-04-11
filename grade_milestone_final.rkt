@@ -37,7 +37,7 @@
                        (* 60
                           (/ (string->number (hash-ref h1 'score "0"))
                              100))))])
-        (hash-set
+        (hash-set*
          h1
          'score grade
          'output (string-join
