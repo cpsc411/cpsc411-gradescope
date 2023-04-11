@@ -40,10 +40,10 @@
        #:combine/key (lambda (k a b)
                        (cond
                          [(eq? k 'score)
-                          ;; Final implementation score is 70/70
+                          ;; Final implementation score is 60/60
                           (number->string
                            (exact->inexact
-                            (* 70
+                            (* 60
                                (/ (max (string->number a) (string->number b))
                                   100))))]
                          [(eq? k 'output)
