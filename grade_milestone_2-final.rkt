@@ -42,6 +42,8 @@
 ;; For the individual tests, use the test-* forms in
 ;; https://docs.racket-lang.org/rackunit/api.html
 
+
+(define AT_LEAST_TOTAL_TESTS 312)
 (define results
   (generate-results/hash
    (test-suite
@@ -91,7 +93,8 @@
                              replace-locations
                              check-paren-x64
                              interp-values-lang
-                             interp-paren-x64))))
+                             interp-paren-x64))
+   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
 
 (define (scale-score-to h r)
   (hash-set h 'score
@@ -102,4 +105,4 @@
            100))))))
 
 (produce-report/exit
- (scale-score-to results 72))
+ (scale-score-to results 50))
