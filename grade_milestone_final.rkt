@@ -20,7 +20,7 @@
      '8]
     [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'specify-representation (thunk #f))
      '7]
-    [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'assign-frames (thunk #f))
+    [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'allocate-frames (thunk #f))
      '6]
     [else #f]))
 
