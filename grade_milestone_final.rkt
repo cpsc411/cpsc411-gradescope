@@ -35,13 +35,13 @@
                       (exact->inexact
                        ;; Final implementation score is 60/60
                        (* 60
-                          (/ (string->number (hash-ref h1 'score))
+                          (/ (string->number (hash-ref h1 'score "0"))
                              100))))])
         (hash-set
          h1
          'score grade
          'output (string-join
-                  (hash-ref h1 'output)
+                  (hash-ref h1 'output "")
                   (format
                    "I see that you're submitting milestone ~a; if this is not correct, please contact the instructor.\n"
                    m)

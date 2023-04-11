@@ -107,8 +107,8 @@
 (produce-report/exit
  (let ([h (scale-score-to results 50)])
    (hash-set h 'output (string-join
-                        (hash-ref h 'output)
+                        (hash-ref h 'output "")
                         (format
                          "Your current implementation grade is: ~a out of 50\n"
-                         (hash-ref h 'score))
+                         (hash-ref h 'score "0"))
                         "\n"))))
