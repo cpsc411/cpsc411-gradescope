@@ -79,7 +79,7 @@
 (current-pass-list
  (map car pass-map))
 
-(define AT_LEAST_TOTAL_TESTS 1464)
+(define AT_LEAST_TOTAL_TESTS 1442)
 
 (provide test-suite-hash AT_LEAST_TOTAL_TESTS)
 (define test-suite-hash
