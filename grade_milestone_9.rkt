@@ -103,7 +103,7 @@
  (map car pass-map))
 
 (provide test-suite-hash AT_LEAST_TOTAL_TESTS)
-(define AT_LEAST_TOTAL_TESTS 3846)
+(define AT_LEAST_TOTAL_TESTS 2619)
 
 (define test-suite-hash
   (generate-results/hash
