@@ -201,6 +201,13 @@
               `#hasheq())
           `#hasheq((score . ,score-str)
                    (tests . ,(append
+                              `(
+                                #hasheq((name . "Debug info")
+                                        (visibility . "hidden")
+                                        (output . ,(format "Total tests possible: ~a~nTotal tests run: ~a~n"
+                                                           total-tests-possible
+                                                           total-tests-run)))
+                                )
                               (append-map (make-failure-hash "Execution error in")
                                           (fold-state-error-names test-results)
                                           (map test-error-result (fold-state-error-results test-results)))
