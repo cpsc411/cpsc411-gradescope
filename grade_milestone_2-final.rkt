@@ -8,8 +8,8 @@
          ;; NB: workaround typo in v3 public test suite
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
-         cpsc411/test-suite/public/v3
-         #;cpsc411/test-suite/private/a2)
+         cpsc411/test-suite/private/v3
+         cpsc411/test-suite/public/v3)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -43,7 +43,7 @@
 ;; https://docs.racket-lang.org/rackunit/api.html
 
 
-(define AT_LEAST_TOTAL_TESTS 312)
+(define AT_LEAST_TOTAL_TESTS 516)
 (define results
   (generate-results/hash
    (test-suite
@@ -75,25 +75,32 @@
       interp-paren-x64-v2
       #f #f))
 
-    #;(a2-private-test-suite (list
-                              check-values-lang
-                              uniquify
-                              sequentialize-let
-                              normalize-bind
-                              select-instructions
-                              assign-homes
-                              flatten-begins
-                              patch-instructions
-                              implement-fvars
-                              generate-x64
-                              wrap-x64-run-time
-                              wrap-x64-boilerplate)
-                             uncover-locals
-                             assign-fvars
-                             replace-locations
-                             check-paren-x64
-                             interp-values-lang
-                             interp-paren-x64))
+    (v3-private-test-suite
+     (list
+      #;check-values-lang
+      uniquify
+      sequentialize-let
+      normalize-bind
+      select-instructions
+      assign-homes
+      flatten-begins
+      patch-instructions
+      implement-fvars
+      generate-x64
+      wrap-x64-run-time
+      wrap-x64-boilerplate)
+     (list
+      #;interp-values-lang-v3
+      interp-values-lang-v3
+      interp-values-unique-lang-v3
+      interp-imp-mf-lang-v3
+      interp-imp-cmf-lang-v3
+      interp-asm-lang-v2
+      interp-nested-asm-lang-v2
+      interp-para-asm-lang-v2
+      interp-paren-x64-fvars-v2
+      interp-paren-x64-v2
+      #f #f)))
    (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
 
 (define (scale-score-to h r)
