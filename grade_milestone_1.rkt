@@ -6,7 +6,8 @@
          cpsc411/compiler-lib
          cpsc411/langs/v1
          cpsc411/test-suite/public/v1
-         cpsc411/test-suite/private/a1)
+         cpsc411/test-suite/utils
+         cpsc411/test-suite/private/v1)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -32,6 +33,7 @@
 ;; true number of tests.
 (define TOTAL_TESTS 55)
 
+(current-enable-grading #t)
 (generate-results
  (test-suite
   ""
@@ -47,7 +49,7 @@
     #f #f)
    check-paren-x64 interp-paren-x64)
 
-  (a1-private-test-suite
+  (v1-private-test-suite
    (list
     check-paren-x64
     generate-x64
