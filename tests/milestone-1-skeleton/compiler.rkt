@@ -10,8 +10,8 @@
  wrap-x64-run-time
  wrap-x64-boilerplate)
 
-(define-syntax-rule (TODO stx)
-  (error "unfinished skeleton"))
+(define-syntax-rule (TODO . stx)
+  (error "Unfinished skeleton"))
 
 ;; Optional; if you choose not to complete, implement a stub that returns the input
 (define (check-paren-x64-init p)
@@ -59,13 +59,20 @@
   (require
    rackunit
    rackunit/text-ui
-   cpsc411/test-suite/public/a1)
+   cpsc411/langs/v1
+   cpsc411/test-suite/public/v1)
 
   (run-tests
-   (a1-public-test-suite
+   (v1-public-test-suite
     (list
      check-paren-x64
      generate-x64
      wrap-x64-run-time
      wrap-x64-boilerplate)
+    (list
+     interp-paren-x64-v1
+     interp-paren-x64-v1
+     #f
+     #f)
+    check-paren-x64
     interp-paren-x64)))
