@@ -8,6 +8,7 @@
          cpsc411/ptr-run-time
          cpsc411/langs/v8
          cpsc411/langs/v9
+         cpsc411/test-suite/utils
          cpsc411/test-suite/private/v9
          cpsc411/test-suite/public/v9)
 
@@ -102,8 +103,10 @@
 (current-pass-list
  (map car pass-map))
 
-(provide test-suite-hash AT_LEAST_TOTAL_TESTS)
+(provide test-suite-hash)
 (define AT_LEAST_TOTAL_TESTS 2619)
+
+(current-enable-grading #t)
 
 (define test-suite-hash
   (generate-results/hash
@@ -115,8 +118,7 @@
 
     (v9-private-test-suite
      (current-pass-list)
-     (map cdr pass-map)))
-   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
+     (map cdr pass-map)))))
 
 (module+ main
   (produce-report/exit

@@ -8,10 +8,11 @@
          ;; NB: workaround typo in v3 public test suite
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
+         cpsc411/test-suite/utils
          cpsc411/langs/v2-reg-alloc
+         cpsc411/test-suite/private/v3
          cpsc411/test-suite/public/v3
-         cpsc411/test-suite/public/v2-reg-alloc
-         cpsc411/test-suite/private/v3)
+         cpsc411/test-suite/public/v2-reg-alloc)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -73,7 +74,10 @@
    #f #f))
 
 ;; Highest observed number
-(define AT_LEAST_TOTAL_TESTS 892)
+;; NOTE: This should no longer be true with current-enable-grading #t, but left for backwards compat
+(define AT_LEAST_TOTAL_TESTS 251)
+
+(current-enable-grading #t)
 
 (generate-results
  (test-suite

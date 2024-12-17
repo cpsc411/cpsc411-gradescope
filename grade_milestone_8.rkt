@@ -4,11 +4,12 @@
 
 (require "lib-grade.rkt"
          rackunit/text-ui
+         cpsc411/test-suite/utils
          cpsc411/compiler-lib
          cpsc411/ptr-run-time
          cpsc411/langs/v8
-         cpsc411/test-suite/public/v8
-         #;cpsc411/test-suite/private/v8)
+         cpsc411/test-suite/private/v8
+         cpsc411/test-suite/public/v8)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -83,8 +84,12 @@
 (current-pass-list
  (map car pass-map))
 
-(provide test-suite-hash AT_LEAST_TOTAL_TESTS)
+(provide test-suite-hash)
+
 (define AT_LEAST_TOTAL_TESTS 1439)
+
+(current-enable-grading #t)
+
 (define test-suite-hash
   (generate-results/hash
    (test-suite
@@ -93,10 +98,9 @@
      (map car pass-map)
      (map cdr pass-map))
 
-    #;(v8-private-test-suite
-       (current-pass-list)
-       (map cdr pass-map)))
-   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
+   (v8-private-test-suite
+     (current-pass-list)
+     (map cdr pass-map)))))
 
 (module+ main
   (produce-report/exit

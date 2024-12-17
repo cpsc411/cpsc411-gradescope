@@ -6,6 +6,7 @@
          rackunit/text-ui
          cpsc411/compiler-lib
          cpsc411/2c-run-time
+         cpsc411/test-suite/utils
          cpsc411/langs/v6
          cpsc411/test-suite/private/v6
          ;; public runs some imperative update code, so needs to be imported
@@ -75,10 +76,12 @@
  (map car pass-map))
 
 ;; this one is strange.
-(define AT_LEAST_TOTAL_TESTS 3833 #; 4474)
+(define AT_LEAST_TOTAL_TESTS 3833)
 
+(provide test-suite-hash)
 
-(provide test-suite-hash AT_LEAST_TOTAL_TESTS)
+(current-enable-grading #t)
+
 (define test-suite-hash
   (generate-results/hash
    (test-suite
@@ -91,8 +94,7 @@
      (current-pass-list)
      (map cdr pass-map)
 
-     impose-calling-conventions))
-   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
+     impose-calling-conventions))))
 
 (module+ main
   (produce-report/exit

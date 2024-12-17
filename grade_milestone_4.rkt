@@ -7,8 +7,9 @@
          cpsc411/compiler-lib
          cpsc411/2c-run-time
          cpsc411/langs/v4
-         cpsc411/test-suite/public/v4
-         cpsc411/test-suite/private/v4)
+         cpsc411/test-suite/utils
+         cpsc411/test-suite/private/v4
+         cpsc411/test-suite/public/v4)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -71,7 +72,9 @@
   (current-pass-list
    (map car pass-map))
 
+;; NOTE: This should no longer be true with current-enable-grading #t, but left for backwards compat
 (define AT_LEAST_TOTAL_TESTS 1586)
+(current-enable-grading #t)
 
 (generate-results
  (test-suite
@@ -92,5 +95,4 @@
    link-paren-x64
    interp-paren-x64
    interp-values-lang
-   check-values-lang))
- (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
+   check-values-lang)))

@@ -12,7 +12,7 @@
 
 (define (detect-final-milestone)
   (cond
-    #;[(dynamic-require '(file "/autograder/submission/compiler.rkt") 'expand-macros (thunk #f))
+    [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'expand-macros (thunk #f))
      '10]
     [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'convert-closures (thunk #f))
      '9]
@@ -20,7 +20,7 @@
      '8]
     [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'specify-representation (thunk #f))
      '7]
-    [(dynamic-require '(file "/autograder/submission/compiler.rkt") 'allocate-frames (thunk #f))
+    #;[(dynamic-require '(file "/autograder/submission/compiler.rkt") 'allocate-frames (thunk #f))
      '6]
     [else #f]))
 

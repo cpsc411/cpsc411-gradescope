@@ -8,7 +8,8 @@
          cpsc411/langs/v8
          cpsc411/langs/v9
          cpsc411/langs/v11
-         cpsc411/test-suite/private/v9
+         cpsc411/test-suite/utils
+         cpsc411/test-suite/private/v10
          cpsc411/test-suite/public/v10)
 
 ;; Use as many
@@ -105,16 +106,20 @@
 (current-pass-list
  (map car pass-map))
 
-(provide test-suite-hash TOTAL_TESTS)
-(define TOTAL_TESTS 4415)
+(provide test-suite-hash)
+
+(current-enable-grading #t)
+
 (define test-suite-hash
   (generate-results/hash
    (test-suite
     ""
     (v10-public-test-suite
      (current-pass-list)
-     (map cdr pass-map)))
-   (lambda (_) TOTAL_TESTS)))
+     (map cdr pass-map))
+    (v10-private-test-suite
+     (current-pass-list)
+     (map cdr pass-map)))))
 
 (module+ main
   (produce-report/exit
