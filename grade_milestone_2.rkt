@@ -8,6 +8,7 @@
          ;; NB: workaround typo in v3 public test suite
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
+         cpsc411/test-suite/utils
          cpsc411/test-suite/private/v3
          cpsc411/test-suite/public/v3)
 
@@ -50,7 +51,12 @@
 ;; could be higher.
 ;;
 ;; This is the lowest apparently correct number observed so far.
-(define AT_LEAST_TOTAL_TESTS 516)
+
+;; NOTE: This should no longer be true with current-enable-grading #t, but left for backwards compat
+
+(define AT_LEAST_TOTAL_TESTS 156)
+
+(current-enable-grading #t)
 
 (generate-results
  (test-suite
