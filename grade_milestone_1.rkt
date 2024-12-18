@@ -31,7 +31,10 @@
 
 ;; NOTE: Because some tests are dynamically generated, we need to provide the
 ;; true number of tests.
-(define TOTAL_TESTS 55)
+;;
+;; NOTE: With current-enable-grading #t, this should no longer be required, but
+;; keeping for backwards compat
+(define TOTAL_TESTS 59)
 
 (current-enable-grading #t)
 (generate-results
@@ -55,5 +58,9 @@
     generate-x64
     wrap-x64-run-time
     wrap-x64-boilerplate)
-   interp-paren-x64))
+   (list
+    interp-paren-x64-v1
+    interp-paren-x64-v1
+    #f #f)
+   check-paren-x64 interp-paren-x64))
  (lambda (_) TOTAL_TESTS))
