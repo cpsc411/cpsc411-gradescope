@@ -73,7 +73,10 @@
    #f #f))
 
 ;; Highest observed number
+;; NOTE: This should no longer be true with current-enable-grading #t, but left for backwards compat
 (define AT_LEAST_TOTAL_TESTS 892)
+
+(current-enable-grading #t)
 
 (generate-results
  (test-suite
