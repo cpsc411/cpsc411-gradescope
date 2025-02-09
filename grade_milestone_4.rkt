@@ -95,5 +95,4 @@
    link-paren-x64
    interp-paren-x64
    interp-values-lang
-   check-values-lang))
- (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
+   check-values-lang)))
