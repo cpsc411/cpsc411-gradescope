@@ -8,6 +8,7 @@
          ;; NB: workaround typo in v3 public test suite
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
+         cpsc411/test-suite/utils
          cpsc411/langs/v2-reg-alloc
          cpsc411/test-suite/public/v3
          cpsc411/test-suite/public/v2-reg-alloc

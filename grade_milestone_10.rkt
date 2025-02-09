@@ -8,6 +8,7 @@
          cpsc411/langs/v8
          cpsc411/langs/v9
          cpsc411/langs/v11
+         cpsc411/test-suite/utils
          cpsc411/test-suite/private/v9
          cpsc411/test-suite/public/v10)
 

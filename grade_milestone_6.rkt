@@ -6,6 +6,7 @@
          rackunit/text-ui
          cpsc411/compiler-lib
          cpsc411/2c-run-time
+         cpsc411/test-suite/utils
          cpsc411/langs/v6
          cpsc411/test-suite/private/v6
          ;; public runs some imperative update code, so needs to be imported

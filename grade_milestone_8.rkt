@@ -4,6 +4,7 @@
 
 (require "lib-grade.rkt"
          rackunit/text-ui
+         cpsc411/test-suite/utils
          cpsc411/compiler-lib
          cpsc411/ptr-run-time
          cpsc411/langs/v8
