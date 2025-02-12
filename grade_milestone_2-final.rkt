@@ -8,8 +8,8 @@
          ;; NB: workaround typo in v3 public test suite
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
-         cpsc411/test-suite/private/v3
-         cpsc411/test-suite/public/v3)
+         cpsc411/test-suite/public/v3
+         cpsc411/test-suite/private/v3)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
@@ -44,6 +44,9 @@
 
 
 (define AT_LEAST_TOTAL_TESTS 516)
+
+(current-enable-grading #t)
+
 (define results
   (generate-results/hash
    (test-suite
@@ -100,8 +103,7 @@
       interp-para-asm-lang-v2
       interp-paren-x64-fvars-v2
       interp-paren-x64-v2
-      #f #f)))
-   (lambda (x) (max x AT_LEAST_TOTAL_TESTS))))
+      #f #f)))))
 
 (define (scale-score-to h r)
   (hash-set h 'score

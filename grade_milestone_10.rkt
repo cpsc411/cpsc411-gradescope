@@ -116,6 +116,9 @@
     ""
     (v10-public-test-suite
      (current-pass-list)
+     (map cdr pass-map))
+    (v10-private-test-suite
+     (current-pass-list)
      (map cdr pass-map)))))
 
 (module+ main

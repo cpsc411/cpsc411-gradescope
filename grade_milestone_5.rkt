@@ -92,5 +92,4 @@
    uncover-locals
    undead-analysis
    impose-calling-conventions
-   check-values-lang))
- (lambda (x) (max x AT_LEAST_TOTAL_TESTS)))
+   check-values-lang)))
