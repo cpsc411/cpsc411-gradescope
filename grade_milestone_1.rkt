@@ -43,25 +43,25 @@
     (test-suite
       ""
       (v1-public-test-suite
-	(list
-	  check-paren-x64
-	  generate-x64
-	  wrap-x64-run-time
-	  wrap-x64-boilerplate)
-	(list
-	  interp-paren-x64-v1
-	  interp-paren-x64-v1
-	  #f #f)
-	check-paren-x64 interp-paren-x64)
+        (list
+          check-paren-x64
+          generate-x64
+          wrap-x64-run-time
+          wrap-x64-boilerplate)
+        (list
+          interp-paren-x64-v1
+          interp-paren-x64-v1
+          #f #f)
+        check-paren-x64 interp-paren-x64)
 
       (v1-private-test-suite
-	(list
-	  check-paren-x64
-	  generate-x64
-	  wrap-x64-run-time
-	  wrap-x64-boilerplate)
-	(list
-	  interp-paren-x64-v1
-	  interp-paren-x64-v1
-	  #f #f)
-	check-paren-x64 interp-paren-x64))))
+        (list
+          check-paren-x64
+          generate-x64
+          wrap-x64-run-time
+          wrap-x64-boilerplate)
+        (list
+          interp-paren-x64-v1
+          interp-paren-x64-v1
+          #f #f)
+        check-paren-x64 interp-paren-x64))))
