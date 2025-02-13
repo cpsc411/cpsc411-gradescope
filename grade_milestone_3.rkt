@@ -10,9 +10,9 @@
          cpsc411/langs/v2
          cpsc411/test-suite/utils
          cpsc411/langs/v2-reg-alloc
+         cpsc411/test-suite/private/v3
          cpsc411/test-suite/public/v3
-         cpsc411/test-suite/public/v2-reg-alloc
-         cpsc411/test-suite/private/v3)
+         cpsc411/test-suite/public/v2-reg-alloc)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)

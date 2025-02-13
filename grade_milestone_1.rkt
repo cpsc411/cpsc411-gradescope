@@ -5,9 +5,9 @@
 (require "lib-grade.rkt"
          cpsc411/compiler-lib
          cpsc411/langs/v1
-         cpsc411/test-suite/public/v1
          cpsc411/test-suite/utils
-         cpsc411/test-suite/private/v1)
+         cpsc411/test-suite/private/v1
+         cpsc411/test-suite/public/v1)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)

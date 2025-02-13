@@ -8,8 +8,8 @@
          cpsc411/compiler-lib
          cpsc411/ptr-run-time
          cpsc411/langs/v8
-         cpsc411/test-suite/public/v8
-         cpsc411/test-suite/private/v8)
+         cpsc411/test-suite/private/v8
+         cpsc411/test-suite/public/v8)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)

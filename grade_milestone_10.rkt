@@ -9,8 +9,8 @@
          cpsc411/langs/v9
          cpsc411/langs/v11
          cpsc411/test-suite/utils
-         cpsc411/test-suite/public/v10
-         cpsc411/test-suite/private/v10)
+         cpsc411/test-suite/private/v10
+         cpsc411/test-suite/public/v10)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)

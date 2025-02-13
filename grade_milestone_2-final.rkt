@@ -8,8 +8,9 @@
          ;; NB: workaround typo in v3 public test suite
          (except-in cpsc411/langs/v3 values-lang-v3)
          cpsc411/langs/v2
-         cpsc411/test-suite/public/v3
-         cpsc411/test-suite/private/v3)
+         cpsc411/test-suite/utils
+         cpsc411/test-suite/private/v3
+         cpsc411/test-suite/public/v3)
 
 ;; Use as many
 ;;   (define-var <varname> from <filename>)
