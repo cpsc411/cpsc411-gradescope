@@ -149,21 +149,32 @@
       (if name
           name
           "Unnamed test"))
+
+    (define debug-output
+      (let ([p (open-output-string)])
+        (parameterize ([current-error-port p]
+                       [current-output-port p])
+          ((current-check-handler) the-exn))
+        (get-output-string p)))
+
+    (define pass-name (continuation-mark-set->list (exn-continuation-marks the-exn) 'pass-name))
+
     (define rendered-output
-      (if name
-          (format "~a test named «~a»" type name)
-          (format "~a unnamed test" type)))
+      (string-append
+        (if name
+          (format "~a test named «~a»~n" type name)
+          (format "~a unnamed test" type))
+        "\n"
+        (format "error raised from pass: ~a" pass-name)
+        "\n"))
+
     (list
      `#hasheq((name . ,short-name)
               (status . "failed")
               (output . ,rendered-output))
      `#hasheq((name . ,(format "Debug for ~a" short-name))
               (visibility . "hidden")
-              (output . ,(let ([p (open-output-string)])
-                           (parameterize ([current-error-port p]
-                                          [current-output-port p])
-                             ((current-check-handler) the-exn))
-                           (get-output-string p))))))
+              (output . ,debug-output))))
 
   (let* ([start-memory (current-memory-use 'cumulative)]
          [start-time (current-milliseconds)]
