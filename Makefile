@@ -10,7 +10,7 @@
 .PHONY: .priv-hash grade.rkt
 
 .priv-hash:
-	git ls-remote git@github.com:cpsc411/cpsc411-priv | grep 2024w2 | cut -f 1 > .priv-hash
+	git ls-remote git@github.com:cpsc411/cpsc411-priv | grep 2025w2 | cut -f 1 > .priv-hash
 
 # Grade with reasonable simulation of Gradescope's script setup
 grade:
