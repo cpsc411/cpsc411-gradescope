@@ -20,3 +20,5 @@ RUN raco pkg update --no-trash --auto cpsc411-lib
 COPY .priv-hash /root/.priv-hash
 RUN git clone --depth 1 --single-branch -b 2025w2 git@github.com:cpsc411/cpsc411-priv
 RUN raco pkg install --batch --auto ./cpsc411-priv/cpsc411-reference-tests ./cpsc411-priv/cpsc411-reference-lib
+
+RUN raco pkg install --batch --auto graph-lib
