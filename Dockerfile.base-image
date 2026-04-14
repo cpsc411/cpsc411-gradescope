@@ -1,7 +1,7 @@
 FROM gradescope/auto-builds:ubuntu-22.04
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install wget binutils git nasm software-properties-common -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install wget binutils git nasm software-properties-common firejail -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean -y
 RUN wget https://download.racket-lang.org/releases/8.15/installers/racket-8.15-x86_64-linux-cs.sh
 RUN echo yes | sh racket-8.15-x86_64-linux-cs.sh
