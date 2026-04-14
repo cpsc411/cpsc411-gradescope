@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-racket /autograder/source/grade.rkt
-
+firejail --noprofile --net=none racket /autograder/source/grade.rkt
